@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0e2238">
+<title>Learn with Gautam Trader — Free Trading Learning Community</title>
+<meta name="description" content="Entry, Target aur Stop-Loss chart examples ke saath seekhein. Free Telegram learning community by Gautam Trader.">
+<meta property="og:title" content="Learn with Gautam Trader">
+<meta property="og:description" content="चार्ट उदाहरणों के साथ ट्रेडिंग सीखें — फ्री टेलीग्राम कम्युनिटी">
+<meta property="og:image" content="gautam.jpeg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#0e2238;
+  --navy2:#153250;
+  --bg:#f3f6fa;
+  --white:#ffffff;
+  --ink:#14202e;
+  --muted:#586a7d;
+  --line:#dfe6ee;
+  --tg:#229ed9;
+  --tg-dark:#1a86b8;
+  --yellow:#ffc83d;
+  --green:#1e8e5a;
+  --red:#d1453b;
+  --blue:#2468c9;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:Inter,"Noto Sans Devanagari",system-ui,sans-serif;
+  font-size:16px;line-height:1.6;
+  padding-bottom:84px;-webkit-tap-highlight-color:transparent;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+.hi{font-family:"Noto Sans Devanagari",Inter,sans-serif}
+.wrap{width:min(1040px,100%);margin:0 auto;padding:0 18px}
+h1,h2,h3{font-family:Poppins,"Noto Sans Devanagari",sans-serif;line-height:1.25}
+
+/* ---------- nav ---------- */
+.nav{background:var(--navy);color:#fff}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:Poppins,sans-serif;font-weight:700;font-size:16px;letter-spacing:-.01em}
+.logo span{color:var(--yellow)}
+.nav .join-link{font-size:13.5px;font-weight:600;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:8px 16px;border-radius:999px;min-height:40px;display:inline-flex;align-items:center}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;min-height:56px;padding:14px 22px;
+  background:var(--tg);color:#fff;font-weight:700;font-size:16.5px;
+  border-radius:14px;cursor:pointer;
+  box-shadow:0 8px 20px rgba(34,158,217,.35);
+  transition:transform .15s,background .15s;
+}
+.btn:hover{background:var(--tg-dark)}
+.btn:active{transform:scale(.98)}
+.btn svg{width:22px;height:22px;fill:#fff;flex-shrink:0}
+
+/* ---------- hero ---------- */
+.hero{background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:34px 0 54px;overflow:hidden;position:relative}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:28px;background:var(--bg);border-radius:28px 28px 0 0}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;background:rgba(255,200,61,.14);color:var(--yellow);border:1px solid rgba(255,200,61,.35);padding:6px 14px;border-radius:999px;margin-bottom:22px}
+.hero-inner{text-align:center;max-width:620px;margin:0 auto}
+
+.photo{position:relative;width:196px;margin:8px auto 34px}
+.photo:before{content:"";position:absolute;inset:14px -14px -14px 14px;background:var(--yellow);border-radius:24px}
+.photo img{position:relative;z-index:1;display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:24px;border:4px solid #fff;background:#cfd8e3}
+.photo .chip{position:absolute;z-index:2;left:50%;bottom:-16px;transform:translateX(-50%);background:#fff;color:var(--ink);font-family:Poppins,sans-serif;font-weight:600;font-size:13.5px;padding:7px 16px;border-radius:999px;box-shadow:0 6px 16px rgba(0,0,0,.25);white-space:nowrap}
+
+.hero h1{font-size:clamp(28px,7.6vw,42px);font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
+.hero h1 em{font-style:normal;color:var(--yellow)}
+.hero .hi-line{font-size:clamp(17px,4.6vw,20px);font-weight:600;color:#dbe6f2;margin-bottom:14px;line-height:1.5}
+.hero p.body{color:#b8c8da;font-size:15.5px;margin-bottom:24px}
+.hero .btn{max-width:420px;margin:0 auto}
+.ticks{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin-top:18px;font-size:13.5px;color:#c9d7e6}
+.ticks span:before{content:"✓";color:var(--yellow);font-weight:700;margin-right:6px}
+
+/* ---------- sections ---------- */
+section{padding:44px 0 6px}
+.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--tg-dark);margin-bottom:8px;text-align:center}
+h2{font-size:clamp(24px,6vw,32px);font-weight:700;letter-spacing:-.015em;text-align:center;margin-bottom:10px}
+.lede{color:var(--muted);text-align:center;max-width:560px;margin:0 auto 26px;font-size:15.5px}
+
+/* ---------- chart ---------- */
+.chartcard{background:var(--white);border-radius:18px;box-shadow:0 6px 24px rgba(20,32,46,.08);padding:18px 14px 12px;max-width:560px;margin:0 auto 22px}
+.chartcard svg{display:block;width:100%;height:auto}
+.chartcard figcaption{text-align:center;color:var(--muted);font-size:12.5px;margin-top:6px}
+
+/* ---------- 3 cards ---------- */
+.cards3{display:grid;gap:14px}
+.card{background:var(--white);border-radius:18px;padding:22px 20px;box-shadow:0 6px 24px rgba(20,32,46,.07);border:1px solid var(--line)}
+.ico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;margin-bottom:14px}
+.ico svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ico.blue{background:#e5eefb;color:var(--blue)}
+.ico.green{background:#e2f4ea;color:var(--green)}
+.ico.red{background:#fbe9e7;color:var(--red)}
+.ico.yellow{background:#fff3cf;color:#a87400}
+.ico.navy{background:#e4ebf3;color:var(--navy2)}
+.ico.tg{background:#e1f3fb;color:var(--tg-dark)}
+.card .step-n{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.card h3{font-size:19px;margin-bottom:6px}
+.card p{color:var(--muted);font-size:14.5px}
+.card p.hi{margin-top:6px;color:#3f5064}
+
+/* ---------- tiles ---------- */
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.tile{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:16px 14px;box-shadow:0 4px 16px rgba(20,32,46,.05)}
+.tile .ico{width:42px;height:42px;border-radius:12px;margin-bottom:10px}
+.tile .ico svg{width:21px;height:21px}
+.tile b{display:block;font-size:14.5px;line-height:1.35;margin-bottom:2px}
+.tile span{display:block;font-size:13px;color:var(--muted);line-height:1.45}
+
+/* ---------- how it works ---------- */
+.steps{display:grid;gap:14px}
+.stepcard{display:flex;gap:16px;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 6px 24px rgba(20,32,46,.06)}
+.stepcard .num{flex-shrink:0;width:42px;height:42px;border-radius:50%;background:var(--navy);color:var(--yellow);font-family:Poppins,sans-serif;font-weight:700;display:grid;place-items:center;font-size:17px}
+.stepcard h3{font-size:16.5px;margin-bottom:2px}
+.stepcard p{color:var(--muted);font-size:14.5px}
+
+/* ---------- fit ---------- */
+.fit{display:grid;gap:14px}
+.fitbox{background:var(--white);border-radius:18px;padding:20px;border:1px solid var(--line);box-shadow:0 6px 24px rgba(20,32,46,.06)}
+.fitbox h3{font-size:16.5px;margin-bottom:10px}
+.fitbox.yes{border-top:4px solid var(--green)}
+.fitbox.no{border-top:4px solid var(--red)}
+.fitbox ul{list-style:none}
+.fitbox li{position:relative;padding:6px 0 6px 26px;font-size:14.5px;color:#3f5064}
+.fitbox li:before{position:absolute;left:0;top:6px;width:18px;height:18px;border-radius:50%;font-size:11px;font-weight:700;display:grid;place-items:center;color:#fff}
+.fitbox.yes li:before{content:"✓";background:var(--green)}
+.fitbox.no li:before{content:"✕";background:var(--red)}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:700px;margin:0 auto;display:grid;gap:10px}
+.faq details{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;padding:16px 44px 16px 18px;font-weight:600;font-size:15.5px;position:relative;min-height:54px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:24px;font-weight:400;color:var(--tg-dark)}
+.faq details[open] summary:after{content:"–"}
+.faq details p{padding:0 18px 16px;color:var(--muted);font-size:14.5px}
+
+/* ---------- final ---------- */
+.final{margin:46px 0 0;background:linear-gradient(180deg,var(--navy),var(--navy2));color:#fff;border-radius:24px;padding:34px 22px;text-align:center}
+.final h2{color:#fff;margin-bottom:8px}
+.final p{color:#b8c8da;font-size:15.5px;margin-bottom:22px}
+.final .btn{max-width:420px;margin:0 auto}
+
+/* ---------- footer ---------- */
+footer{padding:30px 0 16px;color:#6b7b8c;font-size:12.5px;line-height:1.7;text-align:center}
+footer b{color:#44566a}
+
+/* ---------- sticky ---------- */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(243,246,250,.96);border-top:1px solid var(--line);backdrop-filter:blur(8px)}
+.sticky .btn{max-width:560px;margin:0 auto;min-height:52px;font-size:16px}
+
+/* ---------- larger screens ---------- */
+@media(min-width:720px){
+  .hero{padding:56px 0 70px}
+  .cards3{grid-template-columns:repeat(3,1fr)}
+  .tiles{grid-template-columns:repeat(3,1fr)}
+  .steps{grid-template-columns:repeat(3,1fr)}
+  .stepcard{flex-direction:column}
+  .fit{grid-template-columns:1fr 1fr}
+  .photo{width:220px}
+}
+@media(max-width:360px){
+  .wrap{padding:0 14px}
+  .photo{width:170px}
+  .tiles{gap:10px}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap">
+    <div class="logo">Gautam <span>Trader</span></div>
+    <a class="join-link" href="#">Join Free</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="pill hi">फ्री टेलीग्राम लर्निंग कम्युनिटी · Free to join</span>
+
+      <div class="photo">
+        <img src="gautam.jpeg" alt="Gautam Trader">
+        <span class="chip">Gautam Trader</span>
+      </div>
+
+      <h1>Learn <em>Entry, Target</em> & Stop-Loss the simple way</h1>
+      <p class="hi-line hi">चार्ट देखकर ट्रेड प्लान करना सीखें — आसान हिंदी-अंग्रेज़ी में।</p>
+      <p class="body">A free Telegram community for beginners who want to understand how a trade is planned before any money goes in — explained on real charts, step by step.</p>
+
+      <a class="btn join-link" href="#">
+        <svg viewBox="0 0 24 24"><path d="M21.8 3.2 18.5 20c-.25 1.18-.91 1.47-1.85.92l-5-3.68-2.41 2.32c-.27.27-.49.49-1 .49l.36-5.09 9.26-8.37c.4-.36-.09-.56-.63-.2L5.78 13.6.85 12.06c-1.07-.34-1.09-1.07.22-1.58L20.35 3c.9-.33 1.68.2 1.45.2Z"/></svg>
+        <span>Join Free on Telegram · <span class="hi">फ्री जुड़ें</span></span>
+      </a>
+
+      <div class="ticks hi">
+        <span>कोई फीस नहीं</span>
+        <span>No paid tips</span>
+        <span>Beginner friendly</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- ================= CHART ================= -->
+  <section>
+    <div class="eyebrow">The 3-point method</div>
+    <h2>Every trade starts with 3 numbers</h2>
+    <p class="lede hi">हर ट्रेड से पहले तीन चीज़ें तय करें: कहाँ घुसना है, कहाँ निकलना है, और कहाँ गलत साबित होना है।</p>
+
+    <figure class="chartcard">
+      <svg viewBox="0 0 340 176" role="img" aria-label="Example chart showing entry, target and stop-loss levels">
+        <g stroke="#e8edf3" stroke-width="1">
+          <line x1="0" y1="30" x2="340" y2="30"/><line x1="0" y1="72" x2="340" y2="72"/>
+          <line x1="0" y1="114" x2="340" y2="114"/><line x1="0" y1="156" x2="340" y2="156"/>
+        </g>
+        <polyline fill="none" stroke="#14202e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"
+          points="8,146 40,130 70,138 100,116 130,126 160,102 188,108 214,86 240,72 268,58 292,48"/>
+        <rect x="8" y="40" width="284" height="60" fill="#1e8e5a" opacity=".07"/>
+        <rect x="8" y="102" width="284" height="28" fill="#d1453b" opacity=".07"/>
+        <line x1="8" y1="42" x2="298" y2="42" stroke="#1e8e5a" stroke-width="1.8" stroke-dasharray="5 4"/>
+        <line x1="8" y1="102" x2="298" y2="102" stroke="#2468c9" stroke-width="1.8" stroke-dasharray="5 4"/>
+        <line x1="8" y1="132" x2="298" y2="132" stroke="#d1453b" stroke-width="1.8" stroke-dasharray="5 4"/>
+        <circle cx="160" cy="102" r="5" fill="#2468c9" stroke="#fff" stroke-width="2"/>
+        <text x="302" y="46" font-size="10.5" font-weight="700" fill="#1e8e5a" font-family="Inter,sans-serif">TARGET</text>
+        <text x="302" y="106" font-size="10.5" font-weight="700" fill="#2468c9" font-family="Inter,sans-serif">ENTRY</text>
+        <text x="302" y="136" font-size="10.5" font-weight="700" fill="#d1453b" font-family="Inter,sans-serif">STOP</text>
+      </svg>
+      <figcaption class="hi">सिर्फ समझाने के लिए बनाया गया उदाहरण · Illustration only, not a real trade</figcaption>
+    </figure>
+
+    <div class="cards3">
+      <article class="card">
+        <div class="ico blue"><svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg></div>
+        <div class="step-n">POINT 01</div>
+        <h3>Entry <span class="hi">· कब घुसें</span></h3>
+        <p>Spot a level worth entering at, and learn why waiting for the setup matters more than being early.</p>
+        <p class="hi">सही लेवल पहचानें और जल्दबाज़ी से बचें — यही एंट्री की असली समझ है।</p>
+      </article>
+
+      <article class="card">
+        <div class="ico green"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="step-n">POINT 02</div>
+        <h3>Target <span class="hi">· कहाँ बुक करें</span></h3>
+        <p>Pick a realistic target from the chart and plan when to book profit, instead of guessing.</p>
+        <p class="hi">चार्ट से सही टारगेट निकालें और प्रॉफिट बुक करने की योजना बनाएं।</p>
+      </article>
+
+      <article class="card">
+        <div class="ico red"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="step-n">POINT 03</div>
+        <h3>Stop-Loss <span class="hi">· कहाँ निकलें</span></h3>
+        <p>Decide your exit before you enter. A stop-loss keeps one bad trade from becoming a big loss.</p>
+        <p class="hi">एंट्री से पहले तय करें कि कहाँ गलत साबित होंगे — इससे आपकी पूंजी सुरक्षित रहती है।</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= INSIDE ================= -->
+  <section>
+    <div class="eyebrow">Inside the channel</div>
+    <h2>What you get after you join</h2>
+    <p class="lede hi">चैनल जॉइन करने के बाद आपको क्या-क्या सीखने को मिलेगा।</p>
+
+    <div class="tiles">
+      <div class="tile">
+        <div class="ico blue"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><polyline points="7 15 11 11 14 14 19 8"/></svg></div>
+        <b>Chart-based lessons</b><span class="hi">चार्ट पर समझाया गया</span>
+      </div>
+      <div class="tile">
+        <div class="ico tg"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg></div>
+        <b>Simple Hindi-English</b><span class="hi">बिना भारी शब्दों के</span>
+      </div>
+      <div class="tile">
+        <div class="ico red"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <b>Risk management basics</b><span class="hi">कितना रिस्क, क्यों</span>
+      </div>
+      <div class="tile">
+        <div class="ico yellow"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <b>Market basics</b><span class="hi">शुरुआती के लिए बेसिक्स</span>
+      </div>
+      <div class="tile">
+        <div class="ico navy"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/></svg></div>
+        <b>No paid tips</b><span class="hi">कोई पेड टिप्स नहीं</span>
+      </div>
+      <div class="tile">
+        <div class="ico green"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <b>Learning first</b><span class="hi">सीखने पर ज़ोर, दबाव नहीं</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section>
+    <div class="eyebrow">How it works</div>
+    <h2>3 simple steps to start</h2>
+    <p class="lede hi">शुरू करना बहुत आसान है।</p>
+
+    <div class="steps">
+      <div class="stepcard">
+        <div class="num">1</div>
+        <div>
+          <h3>Join the channel <span class="hi">· जॉइन करें</span></h3>
+          <p class="hi">बटन दबाकर Telegram खोलें और चैनल में Join करें। कोई पेमेंट नहीं।</p>
+        </div>
+      </div>
+      <div class="stepcard">
+        <div class="num">2</div>
+        <div>
+          <h3>Follow the lessons <span class="hi">· लेसन पढ़ें</span></h3>
+          <p class="hi">चार्ट उदाहरण पढ़ें और समझें कि एक ट्रेड का प्लान कैसे बनता है।</p>
+        </div>
+      </div>
+      <div class="stepcard">
+        <div class="num">3</div>
+        <div>
+          <h3>Practice first <span class="hi">· पहले प्रैक्टिस</span></h3>
+          <p class="hi">जो सीखा उसे पहले चार्ट पर या पेपर ट्रेड में आज़माएं, फिर आगे बढ़ें।</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FIT ================= -->
+  <section>
+    <div class="eyebrow">Is this for you?</div>
+    <h2>Join only if this sounds like you</h2>
+    <p class="lede hi">यह सबके लिए नहीं है। नीचे देखकर तय करें कि यह आपके काम का है या नहीं।</p>
+
+    <div class="fit">
+      <div class="fitbox yes">
+        <h3>This is for you if…</h3>
+        <ul>
+          <li>You are a beginner and want to understand charts</li>
+          <li>You want to learn risk control before trading</li>
+          <li class="hi">आप सीखने के लिए समय देने को तैयार हैं</li>
+          <li class="hi">आप शॉर्टकट नहीं, सही तरीके से सीखना चाहते हैं</li>
+        </ul>
+      </div>
+      <div class="fitbox no">
+        <h3>This is not for you if…</h3>
+        <ul>
+          <li>You want guaranteed profit or “sure-shot” calls</li>
+          <li>You are looking for a get-rich-quick shortcut</li>
+          <li class="hi">आप बिना सीखे सिर्फ टिप्स फॉलो करना चाहते हैं</li>
+          <li class="hi">आप बस यूँ ही लिंक दबा रहे हैं</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section>
+    <div class="eyebrow">FAQ</div>
+    <h2>Questions before you join</h2>
+    <p class="lede hi">जॉइन करने से पहले अक्सर पूछे जाने वाले सवाल।</p>
+
+    <div class="faq">
+      <details>
+        <summary>Is it really free? <span class="hi">क्या यह सच में फ्री है?</span></summary>
+        <p class="hi">हाँ, चैनल जॉइन करना फ्री है। Yes, joining the Telegram channel costs nothing.</p>
+      </details>
+      <details>
+        <summary>Do I need experience? <span class="hi">क्या अनुभव ज़रूरी है?</span></summary>
+        <p class="hi">नहीं। सब कुछ शुरुआती लोगों को ध्यान में रखकर समझाया जाता है। No — lessons start from the basics.</p>
+      </details>
+      <details>
+        <summary>Is profit guaranteed? <span class="hi">क्या प्रॉफिट की गारंटी है?</span></summary>
+        <p class="hi">नहीं। ट्रेडिंग में जोखिम है और कोई भी प्रॉफिट की गारंटी नहीं दे सकता। This community is for education, not guaranteed returns.</p>
+      </details>
+      <details>
+        <summary>Is this investment advice? <span class="hi">क्या यह निवेश सलाह है?</span></summary>
+        <p class="hi">नहीं। यह सिर्फ शैक्षणिक सामग्री है। कोई भी निर्णय लेने से पहले अपनी रिसर्च करें या वित्तीय सलाहकार से मिलें।</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <div class="final">
+    <h2>Ready to start learning?</h2>
+    <p class="hi">आज ही जुड़ें और चार्ट को सही तरह से पढ़ना सीखना शुरू करें।</p>
+    <a class="btn join-link" href="#">
+      <svg viewBox="0 0 24 24"><path d="M21.8 3.2 18.5 20c-.25 1.18-.91 1.47-1.85.92l-5-3.68-2.41 2.32c-.27.27-.49.49-1 .49l.36-5.09 9.26-8.37c.4-.36-.09-.56-.63-.2L5.78 13.6.85 12.06c-1.07-.34-1.09-1.07.22-1.58L20.35 3c.9-.33 1.68.2 1.45.2Z"/></svg>
+      <span>Open Telegram Channel · <span class="hi">चैनल खोलें</span></span>
+    </a>
+  </div>
+
+  <footer>
+    <b>Disclaimer:</b> This page and channel are for educational purposes only. Nothing here is investment, trading or financial advice, and no profit is guaranteed. Trading in the stock market involves risk — please do your own research or consult a qualified financial advisor.
+    <br><span class="hi">यह सामग्री केवल शिक्षा के उद्देश्य से है। यह निवेश, ट्रेडिंग या वित्तीय सलाह नहीं है और किसी भी प्रॉफिट की गारंटी नहीं दी जाती। ट्रेडिंग में जोखिम शामिल है।</span>
+  </footer>
+
+</main>
+
+<div class="sticky">
+  <a class="btn join-link" href="#">
+    <svg viewBox="0 0 24 24"><path d="M21.8 3.2 18.5 20c-.25 1.18-.91 1.47-1.85.92l-5-3.68-2.41 2.32c-.27.27-.49.49-1 .49l.36-5.09 9.26-8.37c.4-.36-.09-.56-.63-.2L5.78 13.6.85 12.06c-1.07-.34-1.09-1.07.22-1.58L20.35 3c.9-.33 1.68.2 1.45.2Z"/></svg>
+    <span>Join Free on Telegram · <span class="hi">फ्री जुड़ें</span></span>
+  </a>
+</div>
+
+<script>
+(() => {
+'use strict';
+
+const CONFIG = Object.freeze({
+  pixelId: '1480545070586425',
+  telegramUrl: 'https://t.me/+3_s67O_JlAhiYzQ1',
+
+  pageViewDelayMs: 3000,       // interaction ke saath 3 sec
+  passiveReaderDelayMs: 8000,  // bina interaction 8 sec focus
+  minimumClickTimeMs: 1500,    // 1.5 sec se pehle click = fake
+  trackedRedirectDelayMs: 700,
+  fastRedirectDelayMs: 50,
+
+  pageViewKey: 'gautam_pageview_sent',
+  leadKey: 'gautam_lead_sent'
+});
+
+const startedAt = Date.now();
+let pageViewTracked = false;
+let leadTracked = false;
+let redirectStarted = false;
+let humanInteraction = false;
+let hasScrolled = false;
+
+function createEventId(type) {
+  if (window.crypto && crypto.randomUUID) return type + '_' + crypto.randomUUID();
+  return type + '_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+}
+
+function sessionHas(key) { try { return sessionStorage.getItem(key) === '1'; } catch (e) { return false; } }
+function sessionSave(key) { try { sessionStorage.setItem(key, '1'); } catch (e) {} }
+
+/* Bot / automation check */
+function looksAutomated() {
+  if (navigator.webdriver === true) return true;
+  const ua = navigator.userAgent.toLowerCase();
+  const words = ['headless', 'phantomjs', 'selenium', 'puppeteer', 'playwright', 'crawler', 'spider', 'slurp', 'googlebot', 'bingbot', 'facebookexternalhit'];
+  return words.some(w => ua.includes(w));
+}
+
+/* Real (trusted) interaction only */
+function recordInteraction(event) {
+  if (!event.isTrusted) return;
+  humanInteraction = true;
+  if (event.type === 'scroll') hasScrolled = true;
+  checkQualifiedPageView();
+}
+['pointerdown', 'touchstart', 'keydown', 'scroll', 'mousemove'].forEach(name => {
+  window.addEventListener(name, recordInteraction, { passive: true, once: true });
+});
+
+/* Pixel load (no double init) */
+function loadPixel() {
+  if (!window.fbq) {
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=true;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=true;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  }
+  if (window.__GAUTAM_PIXEL_INIT) return;
+  let registered = false;
+  try {
+    if (typeof fbq.getState === 'function') {
+      registered = fbq.getState().pixels.some(p => String(p.id) === String(CONFIG.pixelId));
+    }
+  } catch (e) {}
+  if (!registered) fbq('init', CONFIG.pixelId);
+  window.__GAUTAM_PIXEL_INIT = true;
+}
+
+/* Qualified PageView */
+function checkQualifiedPageView() {
+  if (pageViewTracked) return;
+  if (sessionHas(CONFIG.pageViewKey)) { pageViewTracked = true; return; }
+  if (looksAutomated()) return;
+  if (document.visibilityState !== 'visible') return;
+
+  const elapsed = Date.now() - startedAt;
+  const byInteraction = humanInteraction && elapsed >= CONFIG.pageViewDelayMs;
+  const byFocus = elapsed >= CONFIG.passiveReaderDelayMs && document.hasFocus();
+  if (!byInteraction && !byFocus) return;
+  if (typeof window.fbq !== 'function') return;
+
+  fbq('track', 'PageView', {
+    qualified_view: true,
+    human_interaction: humanInteraction,
+    scrolled: hasScrolled,
+    qualification: byInteraction ? 'interaction_3_seconds' : 'focused_8_seconds',
+    time_on_page: Math.round(elapsed / 1000)
+  }, { eventID: createEventId('pageview') });
+
+  pageViewTracked = true;
+  sessionSave(CONFIG.pageViewKey);
+}
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') checkQualifiedPageView(); });
+setTimeout(checkQualifiedPageView, CONFIG.pageViewDelayMs);
+setTimeout(checkQualifiedPageView, CONFIG.passiveReaderDelayMs);
+
+/* Lead event */
+function fireLead(elapsedMs) {
+  if (leadTracked) return;
+  if (sessionHas(CONFIG.leadKey)) { leadTracked = true; return; }
+  if (typeof window.fbq !== 'function') return;
+
+  fbq('track', 'Lead', {
+    value: 0,
+    currency: 'INR',
+    content_name: 'Learn with Gautam Trader',
+    destination: 'Telegram',
+    qualified_click: true,
+    human_interaction: humanInteraction,
+    time_on_page: Math.round(elapsedMs / 1000)
+  }, { eventID: createEventId('lead') });
+
+  leadTracked = true;
+  sessionSave(CONFIG.leadKey);
+}
+
+/* Click handler: ek click me hi Telegram open hoga */
+function handleTelegramClick(event) {
+  event.preventDefault();
+
+  if (redirectStarted) return;
+  redirectStarted = true;
+
+  const elapsed = Date.now() - startedAt;
+  const genuine = event.isTrusted && elapsed >= CONFIG.minimumClickTimeMs && !looksAutomated();
+
+  if (genuine) fireLead(elapsed);
+
+  setTimeout(() => {
+    window.location.assign(CONFIG.telegramUrl);
+  }, genuine ? CONFIG.trackedRedirectDelayMs : CONFIG.fastRedirectDelayMs);
+}
+
+function initButtons() {
+  document.querySelectorAll('.join-link').forEach(btn => {
+    btn.href = CONFIG.telegramUrl;
+    btn.addEventListener('click', handleTelegramClick);
+  });
+}
+
+loadPixel();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initButtons, { once: true });
+} else {
+  initButtons();
+}
+})();
+</script>
+
+</body>
+</html>
